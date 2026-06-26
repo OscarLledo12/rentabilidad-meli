@@ -49,15 +49,15 @@ st.markdown(
 
     /* Botón Calcular: rosado fuerte con texto NEGRO y bordes NEGROS */
     .stButton > button {
-        background-color: #ff2d95 !important;
+        background-color: #FF69B4 !important;
         background-image: none !important;
-        color: #000000 !important;
-        border: 3px solid #000000 !important;
+        color: #FDFD96 !important;
+        border: 3px solid #FDFD96 !important;
         padding: 12px 24px !important;
         border-radius: 10px !important;
-        font-weight: 700 !important;
-        font-size: 16px !important;
-        box-shadow: 0 6px 18px rgba(255,45,149,0.3) !important;
+        font-weight: 900 !important;
+        font-size: 20px !important;
+        box-shadow: 0 10px 22px rgba(255,45,149,0.3) !important;
     }
     
     .stButton > button:hover {
