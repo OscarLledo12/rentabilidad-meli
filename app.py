@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Calculadora de Rentabilidad", layout="wide")
 
-# --- Estilos personalizados (dark: fondo azul, detalles rosados, texto blanco, botón amarillo con texto negro) ---
+# --- Estilos personalizados (dark: fondo azul, detalles rosados, texto blanco, botón rosado con texto amarillo) ---
 st.markdown(
     """
     <style>
@@ -46,40 +46,43 @@ st.markdown(
         opacity: 1;
     }
 
-    /* Botón Calcular: Amarillo con texto negro */
+    /* Botón Calcular: Rosado con texto amarillo y bordes negros - ANCHO REDUCIDO */
     .stButton > button {
-        background-color: #FFD700 !important;
+        background-color: #FF69B4 !important;
         background-image: none !important;
-        color: #000000 !important;
+        color: #FFD700 !important;
         border: 3px solid #000000 !important;
         padding: 12px 24px !important;
         border-radius: 10px !important;
         font-weight: 900 !important;
         font-size: 20px !important;
-        box-shadow: 0 10px 22px rgba(255, 215, 0, 0.3) !important;
+        box-shadow: 0 10px 22px rgba(255, 105, 180, 0.3) !important;
+        width: 50% !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
     
     .stButton > button:hover {
-        background-color: #FFC700 !important;
-        color: #000000 !important;
+        background-color: #ff1a7f !important;
+        color: #FFD700 !important;
         border: 3px solid #000000 !important;
         filter: brightness(0.9) !important;
-        box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4) !important;
+        box-shadow: 0 8px 24px rgba(255, 105, 180, 0.4) !important;
     }
 
     .stButton > button:active {
-        background-color: #FFB700 !important;
-        color: #000000 !important;
+        background-color: #ff007f !important;
+        color: #FFD700 !important;
         filter: brightness(0.85) !important;
     }
 
-    /* Asegurar que el texto del botón sea negro */
+    /* Asegurar que el texto del botón sea amarillo */
     .stButton > button > p {
-        color: #000000 !important;
+        color: #FFD700 !important;
     }
 
     .stButton > button > span {
-        color: #000000 !important;
+        color: #FFD700 !important;
     }
 
     /* Métricas: asegurar contraste (valores y labels en blanco por defecto) */
@@ -184,7 +187,7 @@ with st.form("ml_calc_form"):
 
     # Botón calcular con espacio adicional
     st.markdown("<br>", unsafe_allow_html=True)
-    submitted = st.form_submit_button("Calcular", use_container_width=True)
+    submitted = st.form_submit_button("Calcular")
 
 # --- Helper / mappings -----------------------------------------
 def cargo_fijo_por_precio(pv):
