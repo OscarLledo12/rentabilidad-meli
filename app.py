@@ -220,43 +220,35 @@ profit_total = profit_per_unit * unidades
 revenue_total = precio_venta * unidades
 total_costs_total = (costo_con_iva + total_fees_per_unit) * unidades
 
-# --- Sección "Rentabilidades" con borde amarillo ---
+# --- Sección "Rentabilidades" con borde amarillo que integra los cálculos ---
 st.markdown(
     """
     <div style="border: 4px solid #FFD700; border-radius: 10px; padding: 20px; background-color: rgba(255, 215, 0, 0.05);">
-        <h2 style="color: #ffffff; text-align: center; margin-top: 0;">Rentabilidades</h2>
+        <h2 style="color: #ffffff; text-align: center; margin-top: 0; margin-bottom: 20px;">Rentabilidades</h2>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
 # Mostrar: Ganancia Neta Unitaria $, Ganancia Neta % (según tu instrucción), Ganancia total $
-r_col1, r_col2, r_col3 = st.columns([1.2, 1.0, 1.2])
-
-# Use inline HTML to render these rentabilidad results in yellow
-r_col1.markdown(
+# TODO dentro del contenedor con borde amarillo
+st.markdown(
     f"""
-    <div style="color:#FFD700; font-weight:700; padding:4px;">
-      <div style="font-size:14px;">Ganancia Neta Unitaria ($)</div>
-      <div style="font-size:22px; font-weight:800;">${profit_per_unit:,.2f}</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-r_col2.markdown(
-    f"""
-    <div style="color:#FFD700; font-weight:700; padding:4px;">
-      <div style="font-size:14px;">Ganancia Neta (%)</div>
-      <div style="font-size:22px; font-weight:800;">{markup_pct:.2f}%</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-r_col3.markdown(
-    f"""
-    <div style="color:#FFD700; font-weight:700; padding:4px;">
-      <div style="font-size:14px;">Ganancia total ($)</div>
-      <div style="font-size:22px; font-weight:800;">${profit_total:,.2f}</div>
+    <div style="border: 4px solid #FFD700; border-radius: 10px; padding: 20px; background-color: rgba(255, 215, 0, 0.05);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+            <div style="text-align: center; padding: 15px; background-color: rgba(102, 51, 153, 0.3); border-radius: 8px;">
+                <div style="color:#FFD700; font-weight:700; font-size:14px; margin-bottom: 10px;">Ganancia Neta Unitaria ($)</div>
+                <div style="color:#FFD700; font-size:28px; font-weight:900;">${profit_per_unit:,.2f}</div>
+            </div>
+            <div style="text-align: center; padding: 15px; background-color: rgba(102, 51, 153, 0.3); border-radius: 8px;">
+                <div style="color:#FFD700; font-weight:700; font-size:14px; margin-bottom: 10px;">Ganancia Neta (%)</div>
+                <div style="color:#FFD700; font-size:28px; font-weight:900;">{markup_pct:.2f}%</div>
+            </div>
+            <div style="text-align: center; padding: 15px; background-color: rgba(102, 51, 153, 0.3); border-radius: 8px;">
+                <div style="color:#FFD700; font-weight:700; font-size:14px; margin-bottom: 10px;">Ganancia total ($)</div>
+                <div style="color:#FFD700; font-size:28px; font-weight:900;">${profit_total:,.2f}</div>
+            </div>
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
