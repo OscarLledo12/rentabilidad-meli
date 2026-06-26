@@ -25,7 +25,7 @@ st.markdown(
     }
 
     /* Sidebar */
-    .css-1lcbmh3.e1fqkh3o2, .stSidebar {
+    .css-1lcbmhc.e1fqkh3o2, .stSidebar {
         background: linear-gradient(180deg, #032230 0%, #042d3b 100%);
         padding: 1rem;
         border-radius: 10px;
@@ -49,7 +49,7 @@ st.markdown(
     /* Botón Calcular: rosado fuerte con texto negro */
     .stButton>button, button[kind="primary"] {
         background: linear-gradient(90deg, #ff007f 0%, #ff2d95 100%);
-        color: #000000 !important;
+        color: #005000 !important;
         border: none;
         padding: 10px 18px;
         border-radius: 10px;
@@ -81,8 +81,13 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- Título e instrucción simple ---
-st.title("Calculadora de Rentabilidad")
+# --- Título con logo a la derecha ---
+col_title, col_logo = st.columns([4, 1])
+with col_title:
+    st.title("Calculadora de Rentabilidad")
+with col_logo:
+    st.image("https://cdn.jsdelivr.net/gh/OscarLledo12/ecommeta-logo@main/logo.png", width=120)
+
 st.markdown("Completa los campos y presiona Calcular al final")
 
 # --- Form -------------------------------------------------------
@@ -204,14 +209,14 @@ if submitted:
     # --- Sección "Rentabilidades" --------------------------------
     st.subheader("Rentabilidades")
 
-    # Mostrar: Ganancia Neta $, Ganancia Neta % (según tu instrucción), Ganancia total $
+    # Mostrar: Ganancia Neta Unitaria $, Ganancia Neta % (según tu instrucción), Ganancia total $
     r_col1, r_col2, r_col3 = st.columns([1.2, 1.0, 1.2])
 
     # Use inline HTML to render these rentabilidad results in yellow
     r_col1.markdown(
         f"""
         <div style="color:#FFD700; font-weight:700; padding:4px;">
-          <div style="font-size:14px;">Ganancia Neta ($)</div>
+          <div style="font-size:14px;">Ganancia Neta Unitaria ($)</div>
           <div style="font-size:22px; font-weight:800;">${profit_per_unit:,.2f}</div>
         </div>
         """,
