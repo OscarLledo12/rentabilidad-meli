@@ -24,6 +24,15 @@ st.markdown(
         color: #ffffff !important;
     }
 
+    /* Título personalizado - más grande */
+    .titulo-custom {
+        font-size: 3.5rem !important;
+        font-weight: 900 !important;
+        text-align: center !important;
+        color: #ffffff !important;
+        margin-bottom: 1rem !important;
+    }
+
     /* Sidebar */
     .css-1lcbmhc.e1fqkh3o2, .stSidebar {
         background: linear-gradient(180deg, #5522aa 0%, #7722cc 100%);
@@ -68,7 +77,7 @@ st.markdown(
 )
 
 # --- Título ---
-st.title("E-commeta - Calculadora de Rentabilidad")
+st.markdown('<div class="titulo-custom">E-commeta - Calculadora de Rentabilidad</div>', unsafe_allow_html=True)
 
 st.markdown("Completa los campos y verás los cálculos en tiempo real")
 
