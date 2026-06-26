@@ -47,7 +47,7 @@ st.markdown(
         opacity: 1;
     }
 
-    /* Botón Calcular: rosado fuerte con texto NEGRO y bordes NEGROS */
+    /* Botón Calcular:  */
     .stButton > button {
         background-color: #FF69B4 !important;
         background-image: none !important;
