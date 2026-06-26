@@ -1,9 +1,8 @@
 import streamlit as st
-from PIL import Image
 
 st.set_page_config(page_title="Calculadora de Rentabilidad", layout="wide")
 
-# --- Estilos personalizados (dark: fondo azul, detalles rosados, texto blanco, botón rosado fuerte con texto negro) ---
+# --- Estilos personalizados (dark: fondo azul, detalles rosados, texto blanco, botón amarillo con texto negro) ---
 st.markdown(
     """
     <style>
@@ -47,29 +46,29 @@ st.markdown(
         opacity: 1;
     }
 
-    /* Botón Calcular:  */
+    /* Botón Calcular: Amarillo con texto negro */
     .stButton > button {
-        background-color: #FF69B4 !important;
+        background-color: #FFD700 !important;
         background-image: none !important;
-        color: #FDFD96 !important;
-        border: 3px solid #FDFD96 !important;
+        color: #000000 !important;
+        border: 3px solid #000000 !important;
         padding: 12px 24px !important;
         border-radius: 10px !important;
         font-weight: 900 !important;
         font-size: 20px !important;
-        box-shadow: 0 10px 22px rgba(255,45,149,0.3) !important;
+        box-shadow: 0 10px 22px rgba(255, 215, 0, 0.3) !important;
     }
     
     .stButton > button:hover {
-        background-color: #ff1a7f !important;
+        background-color: #FFC700 !important;
         color: #000000 !important;
         border: 3px solid #000000 !important;
         filter: brightness(0.9) !important;
-        box-shadow: 0 8px 24px rgba(255,45,149,0.4) !important;
+        box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4) !important;
     }
 
     .stButton > button:active {
-        background-color: #ff007f !important;
+        background-color: #FFB700 !important;
         color: #000000 !important;
         filter: brightness(0.85) !important;
     }
@@ -104,17 +103,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- Título con logo a la derecha ---
-col_title, col_logo = st.columns([3.5, 1])
-with col_title:
-    st.title("Calculadora de Rentabilidad")
-with col_logo:
-    try:
-        # Cargar el logo local
-        img = Image.open("logo.png")
-        st.image(img, width=150, use_column_width=False)
-    except:
-        st.write("Logo")
+# --- Título ---
+st.title("Calculadora de Rentabilidad")
 
 st.markdown("Completa los campos y presiona Calcular al final")
 
