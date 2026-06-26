@@ -20,12 +20,12 @@ st.markdown(
     }
 
     /* Forzar texto blanco en la mayoría de elementos */
-    h1, h2, h3, h4, h5, h6, label, .stText, .stMarkdown p, .stMetric, .stTable td, .stTable th, .css-1dq8tca p {
+    h1, h2, h3, h4, h5, h6, label, .stText, .stMarkdown p, .stMetric, .stTable td, .stTable th {
         color: #ffffff !important;
     }
 
     /* Sidebar */
-    .css-1lcbmhc.e1fqkh3o2, .stSidebar {
+    .css-1lcbmh3.e1fqkh3o2, .stSidebar {
         background: linear-gradient(180deg, #032230 0%, #042d3b 100%);
         padding: 1rem;
         border-radius: 10px;
@@ -46,7 +46,7 @@ st.markdown(
         opacity: 1;
     }
 
-    /* Botón Calcular: rosado fuerte con texto negro para contraste */
+    /* Botón Calcular: rosado fuerte con texto negro */
     .stButton>button, button[kind="primary"] {
         background: linear-gradient(90deg, #ff007f 0%, #ff2d95 100%);
         color: #000000 !important;
@@ -60,7 +60,7 @@ st.markdown(
         filter: brightness(0.95);
     }
 
-    /* Métricas: asegurar contraste (valores y labels en blanco) */
+    /* Métricas: asegurar contraste (valores y labels en blanco por defecto) */
     .stMetric .value {
         color: #ffffff !important;
     }
@@ -131,9 +131,12 @@ with st.form("ml_calc_form"):
     with envio_col:
         costo_envio = st.number_input("COSTO DE ENVÍO ($) por unidad", min_value=0.0, value=0.0, format="%.2f")
 
-    # Mostrar costo final con IVA (calculado) en un texto claro
+    # Mostrar costo final con IVA (calculado) - etiqueta personalizada en blanco
     costo_con_iva = costo * (1 + iva_pct / 100.0)
-    st.markdown(f"**COSTO FINAL CON IVA ($):** ${costo_con_iva:,.2f}")
+    st.markdown(
+        f"<div style='color:#ffffff; font-weight:700;'>Costo final c/iva: <span style=\"color:#ffffff\">${costo_con_iva:,.2f}</span></div>",
+        unsafe_allow_html=True,
+    )
 
     # Tercera fila: IMPUESTOS, CUOTAS, PUBLICIDAD
     st.markdown("### Ajustes adicionales")
@@ -171,7 +174,7 @@ def cargo_fijo_por_precio(pv):
 
 # --- Cálculo ----------------------------------------------------
 if submitted:
-    # Calculos internos (no se muestran montos desglosados)
+    # Cálculos internos (no se muestran montos desglosados)
     ml_comision = precio_venta * (ml_pct / 100.0)
     cuotas_comision = precio_venta * (cuotas_pct / 100.0)
     impuesto_monto = precio_venta * (impuestos_pct / 100.0)
@@ -187,18 +190,11 @@ if submitted:
         + costo_envio
     )
 
-    # Ganancia neta por unidad
+    # Ganancia neta por unidad ($)
     profit_per_unit = precio_venta - costo_con_iva - total_fees_per_unit
 
-    # Márgenes:
-    # Markup = ganancia / costo_final_con_iva * 100 (se muestra como "Markup")
+    # Markup (%) = ganancia / costo_final_con_iva * 100  (se muestra como markup)
     markup_pct = (profit_per_unit / costo_con_iva * 100.0) if costo_con_iva > 0 else 0.0
-
-    # Ganancia Neta % (ganancia / precio)
-    ganancia_neta_pct = (profit_per_unit / precio_venta * 100.0) if precio_venta > 0 else 0.0
-
-    # Margen sobre venta = Ganancia neta / Costo final con IVA (según tu instrucción)
-    margen_sobre_venta_pct = (profit_per_unit / costo_con_iva * 100.0) if costo_con_iva > 0 else 0.0
 
     # Totales para N unidades
     profit_total = profit_per_unit * unidades
@@ -208,16 +204,37 @@ if submitted:
     # --- Sección "Rentabilidades" --------------------------------
     st.subheader("Rentabilidades")
 
-    # Mostrar en orden: Ganancia Neta $, Ganancia Neta %, Margen sobre venta (%) (según fórmula solicitada), Ganancia total $
-    r_col1, r_col2, r_col3, r_col4 = st.columns([1.1, 1.0, 1.0, 1.2])
-    with r_col1:
-        st.metric("Ganancia Neta ($)", f"${profit_per_unit:,.2f}")
-    with r_col2:
-        st.metric("Ganancia Neta (%)", f"{ganancia_neta_pct:.2f}%")
-    with r_col3:
-        st.metric("Margen sobre venta (%)", f"{margen_sobre_venta_pct:.2f}%")
-    with r_col4:
-        st.metric("Ganancia total ($)", f"${profit_total:,.2f}")
+    # Mostrar: Ganancia Neta $, Ganancia Neta % (según tu instrucción), Ganancia total $
+    r_col1, r_col2, r_col3 = st.columns([1.2, 1.0, 1.2])
+
+    # Use inline HTML to render these rentabilidad results in yellow
+    r_col1.markdown(
+        f"""
+        <div style="color:#FFD700; font-weight:700; padding:4px;">
+          <div style="font-size:14px;">Ganancia Neta ($)</div>
+          <div style="font-size:22px; font-weight:800;">${profit_per_unit:,.2f}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    r_col2.markdown(
+        f"""
+        <div style="color:#FFD700; font-weight:700; padding:4px;">
+          <div style="font-size:14px;">Ganancia Neta (%)</div>
+          <div style="font-size:22px; font-weight:800;">{markup_pct:.2f}%</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    r_col3.markdown(
+        f"""
+        <div style="color:#FFD700; font-weight:700; padding:4px;">
+          <div style="font-size:14px;">Ganancia total ($)</div>
+          <div style="font-size:22px; font-weight:800;">${profit_total:,.2f}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.write("---")
 
@@ -245,7 +262,7 @@ if submitted:
     st.subheader("Notas y supuestos")
     st.markdown(
         """
-        - "Margen sobre venta (%)" se calcula como Ganancia neta dividido por Costo final con IVA, tal como solicitaste.
+        - "Ganancia Neta (%)" se calcula como Ganancia neta dividido por Costo final con IVA (markup).
         - No se muestran montos en ARS desglosados para: comisiones ML, impuestos aplicados sobre PV, cargos por cuotas ni publicidad. Solo se muestran los porcentajes seleccionados.
         - Los porcentajes ingresados son aplicados sobre el PRECIO DE VENTA FINAL (PV) cuando corresponde (comisiones, cuotas, impuestos, publicidad).
         - El cargo fijo se aplica por unidad según la tabla proporcionada; si el PV está fuera de rango (> $33.000) el cargo fijo queda en $0 (se muestra sin alertas).
