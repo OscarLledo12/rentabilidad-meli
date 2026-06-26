@@ -96,7 +96,7 @@ if 'cuotas_option' not in st.session_state:
 if 'publicidad_pct' not in st.session_state:
     st.session_state.publicidad_pct = 0.0
 
-# --- Form sin botón de envío ---
+# --- Inputs sin formulario (sin st.form) ---
 # Primera fila: PRODUCTO, UNIDADES, CODIGO, CATEGORIA
 st.subheader("Detalles del producto")
 prod_col, unidades_col, codigo_col, cat_col = st.columns([3.2, 0.7, 1.2, 1.6])
@@ -220,8 +220,15 @@ profit_total = profit_per_unit * unidades
 revenue_total = precio_venta * unidades
 total_costs_total = (costo_con_iva + total_fees_per_unit) * unidades
 
-# --- Sección "Rentabilidades" --------------------------------
-st.subheader("Rentabilidades")
+# --- Sección "Rentabilidades" con borde amarillo ---
+st.markdown(
+    """
+    <div style="border: 4px solid #FFD700; border-radius: 10px; padding: 20px; background-color: rgba(255, 215, 0, 0.05);">
+        <h2 style="color: #ffffff; text-align: center; margin-top: 0;">Rentabilidades</h2>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Mostrar: Ganancia Neta Unitaria $, Ganancia Neta % (según tu instrucción), Ganancia total $
 r_col1, r_col2, r_col3 = st.columns([1.2, 1.0, 1.2])
