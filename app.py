@@ -1,4 +1,7 @@
 import streamlit as st
+from PIL import Image
+import requests
+from io import BytesIO
 
 st.set_page_config(page_title="Calculadora de Rentabilidad", layout="wide")
 
@@ -46,18 +49,25 @@ st.markdown(
         opacity: 1;
     }
 
-    /* Botón Calcular: rosado fuerte con texto negro */
-    .stButton>button, button[kind="primary"] {
-        background: linear-gradient(90deg, #ff007f 0%, #ff2d95 100%);
-        color: #005000 !important;
-        border: none;
-        padding: 10px 18px;
-        border-radius: 10px;
-        font-weight: 700;
-        box-shadow: 0 6px 18px rgba(255,45,149,0.18);
+    /* Botón Calcular: rosado fuerte con texto negro - VISIBLE */
+    .stButton > button {
+        background: linear-gradient(90deg, #ff007f 0%, #ff2d95 100%) !important;
+        color: #000000 !important;
+        border: none !important;
+        padding: 12px 24px !important;
+        border-radius: 10px !important;
+        font-weight: 700 !important;
+        font-size: 16px !important;
+        box-shadow: 0 6px 18px rgba(255,45,149,0.3) !important;
     }
-    .stButton>button:hover {
-        filter: brightness(0.95);
+    
+    .stButton > button:hover {
+        filter: brightness(0.95) !important;
+        box-shadow: 0 8px 24px rgba(255,45,149,0.4) !important;
+    }
+
+    .stButton > button:active {
+        filter: brightness(0.9) !important;
     }
 
     /* Métricas: asegurar contraste (valores y labels en blanco por defecto) */
@@ -82,11 +92,18 @@ st.markdown(
 )
 
 # --- Título con logo a la derecha ---
-col_title, col_logo = st.columns([4, 1])
+col_title, col_logo = st.columns([3.5, 1])
 with col_title:
     st.title("Calculadora de Rentabilidad")
 with col_logo:
-    st.image("https://cdn.jsdelivr.net/gh/OscarLledo12/ecommeta-logo@main/logo.png", width=120)
+    try:
+        # Intentar cargar el logo desde URL
+        url = "https://raw.githubusercontent.com/OscarLledo12/ecommeta-logo/main/logo.png"
+        response = requests.get(url)
+        img = Image.open(BytesIO(response.content))
+        st.image(img, width=150, use_column_width=False)
+    except:
+        st.write("Logo")
 
 st.markdown("Completa los campos y presiona Calcular al final")
 
@@ -164,8 +181,9 @@ with st.form("ml_calc_form"):
     with publicidad_col:
         publicidad_pct = st.number_input("Publicidad (%)", min_value=0.0, value=0.0, format="%.2f")
 
-    # Botón calcular (estilizado por CSS arriba)
-    submitted = st.form_submit_button("Calcular")
+    # Botón calcular con espacio adicional
+    st.markdown("<br>", unsafe_allow_html=True)
+    submitted = st.form_submit_button("Calcular", use_container_width=True)
 
 # --- Helper / mappings -----------------------------------------
 def cargo_fijo_por_precio(pv):
