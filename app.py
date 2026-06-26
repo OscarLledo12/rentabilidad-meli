@@ -46,43 +46,53 @@ st.markdown(
         opacity: 1;
     }
 
-    /* Botón Calcular: Rosado con texto amarillo y bordes negros - ANCHO REDUCIDO */
+    /* Botón Calcular: Verde fuerte con texto negro - GRANDE Y CENTRADO */
+    .stButton {
+        display: flex;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+
     .stButton > button {
-        background-color: #FF69B4 !important;
+        background-color: #00CC00 !important;
         background-image: none !important;
-        color: #FFD700 !important;
-        border: 3px solid #000000 !important;
-        padding: 12px 24px !important;
-        border-radius: 10px !important;
+        color: #000000 !important;
+        border: 4px solid #000000 !important;
+        padding: 20px 60px !important;
+        border-radius: 15px !important;
         font-weight: 900 !important;
-        font-size: 20px !important;
-        box-shadow: 0 10px 22px rgba(255, 105, 180, 0.3) !important;
-        width: 50% !important;
-        margin: 0 auto !important;
-        display: block !important;
+        font-size: 24px !important;
+        box-shadow: 0 12px 28px rgba(0, 204, 0, 0.4) !important;
+        width: auto !important;
+        min-width: 300px !important;
+        display: inline-block !important;
     }
     
     .stButton > button:hover {
-        background-color: #ff1a7f !important;
-        color: #FFD700 !important;
-        border: 3px solid #000000 !important;
-        filter: brightness(0.9) !important;
-        box-shadow: 0 8px 24px rgba(255, 105, 180, 0.4) !important;
+        background-color: #00AA00 !important;
+        color: #000000 !important;
+        border: 4px solid #000000 !important;
+        filter: brightness(1.1) !important;
+        box-shadow: 0 14px 32px rgba(0, 204, 0, 0.5) !important;
     }
 
     .stButton > button:active {
-        background-color: #ff007f !important;
-        color: #FFD700 !important;
-        filter: brightness(0.85) !important;
+        background-color: #008800 !important;
+        color: #000000 !important;
+        filter: brightness(0.95) !important;
     }
 
-    /* Asegurar que el texto del botón sea amarillo */
+    /* Asegurar que el texto del botón sea negro */
     .stButton > button > p {
-        color: #FFD700 !important;
+        color: #000000 !important;
+        font-weight: 900 !important;
+        font-size: 24px !important;
     }
 
     .stButton > button > span {
-        color: #FFD700 !important;
+        color: #000000 !important;
+        font-weight: 900 !important;
+        font-size: 24px !important;
     }
 
     /* Métricas: asegurar contraste (valores y labels en blanco por defecto) */
@@ -185,9 +195,9 @@ with st.form("ml_calc_form"):
     with publicidad_col:
         publicidad_pct = st.number_input("Publicidad (%)", min_value=0.0, value=0.0, format="%.2f")
 
-    # Botón calcular con espacio adicional
+    # Botón calcular - GRANDE, CENTRADO Y VERDE
     st.markdown("<br>", unsafe_allow_html=True)
-    submitted = st.form_submit_button("Calcular")
+    submitted = st.form_submit_button("CALCULAR")
 
 # --- Helper / mappings -----------------------------------------
 def cargo_fijo_por_precio(pv):
@@ -284,14 +294,3 @@ if submitted:
     st.write(f"- Ingreso bruto total (todas las unidades): ${revenue_total:,.2f}")
     st.write(f"- Costos + fees totales (todas las unidades): ${total_costs_total:,.2f}")
     st.write(f"- Ganancia neta total (todas las unidades): ${profit_total:,.2f}")
-
-    st.write("---")
-    st.subheader("Notas y supuestos")
-    st.markdown(
-        """
-        - "Ganancia Neta (%)" se calcula como Ganancia neta dividido por Costo final con IVA (markup).
-        - No se muestran montos en ARS desglosados para: comisiones ML, impuestos aplicados sobre PV, cargos por cuotas ni publicidad. Solo se muestran los porcentajes seleccionados.
-        - Los porcentajes ingresados son aplicados sobre el PRECIO DE VENTA FINAL (PV) cuando corresponde (comisiones, cuotas, impuestos, publicidad).
-        - El cargo fijo se aplica por unidad según la tabla proporcionada; si el PV está fuera de rango (> $33.000) el cargo fijo queda en $0 (se muestra sin alertas).
-        """
-    )
