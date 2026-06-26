@@ -2,13 +2,13 @@ import streamlit as st
 
 st.set_page_config(page_title="Calculadora de Rentabilidad", layout="wide")
 
-# --- Estilos personalizados (dark: fondo azul, detalles rosados, texto blanco, botón rosado con texto amarillo) ---
+# --- Estilos personalizados (fondo lila, detalles rosados, texto blanco) ---
 st.markdown(
     """
     <style>
-    /* Fondo principal y texto blanco */
+    /* Fondo principal lila y texto blanco */
     .stApp {
-        background: linear-gradient(180deg, #041527 0%, #063045 100%);
+        background: linear-gradient(180deg, #663399 0%, #9933cc 100%);
         color: #ffffff;
     }
 
@@ -26,7 +26,7 @@ st.markdown(
 
     /* Sidebar */
     .css-1lcbmhc.e1fqkh3o2, .stSidebar {
-        background: linear-gradient(180deg, #032230 0%, #042d3b 100%);
+        background: linear-gradient(180deg, #5522aa 0%, #7722cc 100%);
         padding: 1rem;
         border-radius: 10px;
         color: #ffffff;
@@ -34,7 +34,7 @@ st.markdown(
 
     /* Inputs (cajas de texto / número / select) */
     input, textarea, select {
-        background-color: #0b2633 !important;
+        background-color: #4a1f66 !important;
         color: #ffffff !important;
         border: 1px solid rgba(255, 102, 178, 0.18) !important;
         border-radius: 6px;
@@ -42,7 +42,7 @@ st.markdown(
 
     /* Placeholders y labels en inputs */
     ::placeholder {
-        color: #bcd9e6 !important;
+        color: #d4b5e6 !important;
         opacity: 1;
     }
 
