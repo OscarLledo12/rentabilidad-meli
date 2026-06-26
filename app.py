@@ -68,7 +68,7 @@ st.markdown(
 )
 
 # --- Título ---
-st.title("Calculadora de Rentabilidad")
+st.title("E-commeta - Calculadora de Rentabilidad")
 
 st.markdown("Completa los campos y verás los cálculos en tiempo real")
 
@@ -101,13 +101,13 @@ if 'publicidad_pct' not in st.session_state:
 st.subheader("Detalles del producto")
 prod_col, unidades_col, codigo_col, cat_col = st.columns([3.2, 0.7, 1.2, 1.6])
 with prod_col:
-    producto = st.text_input("PRODUCTO", value=st.session_state.producto, placeholder="Nombre del producto", key="producto_input")
+    producto = st.text_input("Producto", value=st.session_state.producto, placeholder="Nombre del producto", key="producto_input")
     st.session_state.producto = producto
 with unidades_col:
-    unidades = st.number_input("UNIDADES", min_value=1, value=st.session_state.unidades, step=1, key="unidades_input")
+    unidades = st.number_input("Unidades", min_value=1, value=st.session_state.unidades, step=1, key="unidades_input")
     st.session_state.unidades = unidades
 with codigo_col:
-    codigo_producto = st.text_input("CÓDIGO DE PRODUCTO", value=st.session_state.codigo_producto, placeholder="SKU / Código", key="codigo_input")
+    codigo_producto = st.text_input("Codigo de producto", value=st.session_state.codigo_producto, placeholder="SKU / Código", key="codigo_input")
     st.session_state.codigo_producto = codigo_producto
 with cat_col:
     category_options = [
