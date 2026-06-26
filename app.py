@@ -80,11 +80,11 @@ if 'codigo_producto' not in st.session_state:
 if 'unidades' not in st.session_state:
     st.session_state.unidades = 1
 if 'costo' not in st.session_state:
-    st.session_state.costo = 1000.0
+    st.session_state.costo = 0.0
 if 'iva_choice' not in st.session_state:
     st.session_state.iva_choice = "21%"
 if 'precio_venta' not in st.session_state:
-    st.session_state.precio_venta = 20000.0
+    st.session_state.precio_venta = 0.0
 if 'costo_envio' not in st.session_state:
     st.session_state.costo_envio = 0.0
 if 'categoria_sel' not in st.session_state:
@@ -94,7 +94,7 @@ if 'impuestos_pct' not in st.session_state:
 if 'cuotas_option' not in st.session_state:
     st.session_state.cuotas_option = "Sin cuotas (0%)"
 if 'publicidad_pct' not in st.session_state:
-    st.session_state.publicidad_pct = 0.0
+    st.session_state.publicidad_pct = 5.0
 
 # --- Inputs sin formulario (sin st.form) ---
 # Primera fila: PRODUCTO, UNIDADES, CODIGO, CATEGORIA
@@ -136,17 +136,17 @@ with cat_col:
 st.markdown("### Costos y precio")
 costo_col, iva_col, pv_col, envio_col = st.columns([1.2, 0.5, 1.2, 1.0])
 with costo_col:
-    costo = st.number_input("COSTO ($)", min_value=0.0, value=st.session_state.costo, format="%.2f", key="costo_input")
+    costo = st.number_input("Costo sin IVA $", min_value=0.0, value=st.session_state.costo, format="%.2f", key="costo_input")
     st.session_state.costo = costo
 with iva_col:
     iva_choice = st.selectbox("IVA", options=["10.5%", "21%"], index=0 if st.session_state.iva_choice == "10.5%" else 1, key="iva_input")
     st.session_state.iva_choice = iva_choice
     iva_pct = 10.5 if iva_choice == "10.5%" else 21.0
 with pv_col:
-    precio_venta = st.number_input("PRECIO DE VENTA FINAL (PV Final) ($)", min_value=0.0, value=st.session_state.precio_venta, format="%.2f", key="pv_input")
+    precio_venta = st.number_input("PV Final $", min_value=0.0, value=st.session_state.precio_venta, format="%.2f", key="pv_input")
     st.session_state.precio_venta = precio_venta
 with envio_col:
-    costo_envio = st.number_input("COSTO DE ENVÍO ($) por unidad", min_value=0.0, value=st.session_state.costo_envio, format="%.2f", key="envio_input")
+    costo_envio = st.number_input("Valor Unitario Envio $", min_value=0.0, value=st.session_state.costo_envio, format="%.2f", key="envio_input")
     st.session_state.costo_envio = costo_envio
 
 # Mostrar costo final con IVA (calculado) - etiqueta personalizada en blanco
