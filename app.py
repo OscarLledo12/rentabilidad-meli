@@ -1,7 +1,5 @@
 import streamlit as st
 from PIL import Image
-import requests
-from io import BytesIO
 
 st.set_page_config(page_title="Calculadora de Rentabilidad", layout="wide")
 
@@ -49,11 +47,12 @@ st.markdown(
         opacity: 1;
     }
 
-    /* Botón Calcular: rosado fuerte con texto negro - VISIBLE */
+    /* Botón Calcular: rosado fuerte con texto NEGRO y bordes NEGROS */
     .stButton > button {
-        background: linear-gradient(90deg, #ff007f 0%, #ff2d95 100%) !important;
+        background-color: #ff2d95 !important;
+        background-image: none !important;
         color: #000000 !important;
-        border: none !important;
+        border: 3px solid #000000 !important;
         padding: 12px 24px !important;
         border-radius: 10px !important;
         font-weight: 700 !important;
@@ -62,12 +61,26 @@ st.markdown(
     }
     
     .stButton > button:hover {
-        filter: brightness(0.95) !important;
+        background-color: #ff1a7f !important;
+        color: #000000 !important;
+        border: 3px solid #000000 !important;
+        filter: brightness(0.9) !important;
         box-shadow: 0 8px 24px rgba(255,45,149,0.4) !important;
     }
 
     .stButton > button:active {
-        filter: brightness(0.9) !important;
+        background-color: #ff007f !important;
+        color: #000000 !important;
+        filter: brightness(0.85) !important;
+    }
+
+    /* Asegurar que el texto del botón sea negro */
+    .stButton > button > p {
+        color: #000000 !important;
+    }
+
+    .stButton > button > span {
+        color: #000000 !important;
     }
 
     /* Métricas: asegurar contraste (valores y labels en blanco por defecto) */
@@ -97,10 +110,8 @@ with col_title:
     st.title("Calculadora de Rentabilidad")
 with col_logo:
     try:
-        # Intentar cargar el logo desde URL
-        url = "https://raw.githubusercontent.com/OscarLledo12/ecommeta-logo/main/logo.png"
-        response = requests.get(url)
-        img = Image.open(BytesIO(response.content))
+        # Cargar el logo local
+        img = Image.open("logo.png")
         st.image(img, width=150, use_column_width=False)
     except:
         st.write("Logo")
