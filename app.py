@@ -77,7 +77,7 @@ st.markdown(
 )
 
 # --- Título ---
-st.markdown('<div class="titulo-custom">E-commeta - Calculadora de Rentabilidad</div>', unsafe_allow_html=True)
+st.markdown('<div class="titulo-custom">Calculadora de Rentabilidad MeLi - Ecommeta</div>', unsafe_allow_html=True)
 
 st.markdown("Completa los campos y verás los cálculos en tiempo real")
 
